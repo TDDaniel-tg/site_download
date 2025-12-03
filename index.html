@@ -1,23 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105210441', 'ym');
-
-    ym(105210441, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/105210441" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
-
-
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Расширение для Wildberries - Автоматизация поставок</title>
@@ -192,6 +175,57 @@
         .feature-card p {
             color: var(--text-secondary);
             line-height: 1.6;
+        }
+
+        /* Video Section */
+        .video-section {
+            padding: 80px 0;
+            background: var(--bg-primary);
+        }
+
+        .video-section h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .video-section p {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 18px;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .video-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            background: #000;
+        }
+
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         /* Pricing */
@@ -371,12 +405,15 @@
                 <h1>Автоматизация Wildberries</h1>
                 <p>Профессиональное расширение для автоматической ловли поставок и перераспределения остатков на Wildberries</p>
                 <div class="cta-buttons">
+                    <a href="wb поставки менеджер.zip" class="btn btn-primary" download>
+                        📥 Скачать архив с расширением
+                    </a>
+                    <!--<a href="WB-Extension-Installer-Mac-v1.0.0.dmg" class="btn btn-primary" download>
                     <a href="WB-Extension-Installer-Windows-v1.0.0.exe" class="btn btn-primary" download>
                         📥 Скачать для Windows
                     </a>
-                    <a href="WB-Extension-Installer-Mac-v1.0.0.dmg" class="btn btn-primary" download>
                         📥 Скачать для MacOS
-                    </a> 
+                    </a> -->
                     <a href="Инструкция по установке WB Поставки Менеджер.pdf" class="btn btn-secondary" download>
                         📄 Инструкция
                     </a>
@@ -402,6 +439,22 @@
                         <div class="feature-icon">🔔</div>
                         <h3>Уведомления</h3>
                         <p>Мгновенные уведомления о важных событиях и изменениях в системе</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="video-section">
+            <div class="container">
+                <h2>Видео инструкция</h2>
+                <p>Пошаговая инструкция по установке и настройке расширения</p>
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <video controls preload="metadata">
+                            <source src="video-instruction.mp4" type="video/mp4">
+                            <source src="video-instruction.webm" type="video/webm">
+                            Ваш браузер не поддерживает воспроизведение видео.
+                        </video>
                     </div>
                 </div>
             </div>
@@ -443,5 +496,43 @@
         </div>
     </footer>
 
+    <script>
+        // Функция переключения темы
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeIcon = document.querySelector('.theme-icon');
+            const currentTheme = html.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                // Переключаем на светлую тему
+                html.removeAttribute('data-theme');
+                themeIcon.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            } else {
+                // Переключаем на темную тему
+                html.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Загрузка сохраненной темы при загрузке страницы
+        function loadTheme() {
+            const html = document.documentElement;
+            const themeIcon = document.querySelector('.theme-icon');
+            const savedTheme = localStorage.getItem('theme');
+            
+            if (savedTheme === 'dark') {
+                html.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '☀️';
+            } else {
+                html.removeAttribute('data-theme');
+                themeIcon.textContent = '🌙';
+            }
+        }
+
+        // Загружаем тему сразу при загрузке страницы
+        loadTheme();
+    </script>
 </body>
 </html>
